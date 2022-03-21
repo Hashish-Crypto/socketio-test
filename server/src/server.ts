@@ -2,6 +2,9 @@ import 'dotenv/config'
 import 'reflect-metadata'
 
 import { createExpressServer, RoutingControllersOptions } from 'routing-controllers'
+import Websocket from './websocket/websocket'
+import { createServer } from 'http'
+import OrdersSocket from './websocket/orders.socket'
 
 const port = process.env.APP_PORT || 3000
 
@@ -15,7 +18,11 @@ const routingControllerOptions: RoutingControllersOptions = {
 }
 
 const app = createExpressServer(routingControllerOptions)
+const httpServer = createServer(app)
+const io = Websocket.getInstance(httpServer)
 
-app.listen(port, () => {
+io.initializeHandlers([{ path: '/orders', handler: new OrdersSocket() }])
+
+httpServer.listen(port, () => {
   console.log(`This is working in port ${port}`)
 })
