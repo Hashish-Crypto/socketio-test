@@ -2,9 +2,9 @@ import 'dotenv/config'
 import 'reflect-metadata'
 
 import { createExpressServer, RoutingControllersOptions } from 'routing-controllers'
-import Websocket from './websocket/websocket'
+import Websocket from './modules/websocket/websocket'
 import { createServer } from 'http'
-import OrdersSocket from './websocket/orders.socket'
+import OrdersSocket from './modules/websocket/orders.socket'
 
 const port = process.env.APP_PORT || 3000
 
