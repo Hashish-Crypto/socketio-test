@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game Server Test</title>
+  </head>
+  <body>
+    <script
+      src="https://cdn.socket.io/4.4.1/socket.io.min.js"
+      integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      var socket = io('http://localhost:3000')
+      socket.emit('walkRight')
+
+      socket.on('walkRight', function () {
+        console.log('walkRight emitted on client')
+      })
+
+      console.log(socket)
+    </script>
+  </body>
+</html>
